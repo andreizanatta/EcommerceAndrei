@@ -1,0 +1,55 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Preço
+            </th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        
+    </tbody>
+</table>
+<div>
+    <a title="Finalizar Compra" class="level-1 trsn nav-link" asp-controller="Home" asp-action="FinalizarCompra">Finalizar Compra</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        var tbody = $("#tbody");
+
+        var contador = 1;
+        JSON.parse(localStorage.getItem("cesta_produtos")).forEach(produto => {
+            var conteudo = "";
+            conteudo += "<tr>";
+            conteudo += "<td>";
+            conteudo += produto.nome;
+            conteudo += "</td>";
+            conteudo += "<td>";
+            conteudo += produto.preco;
+            conteudo += "</td>";
+            conteudo += "<td>";
+            conteudo += "<button onClick='AdicionaProduto(" + contador +");' type='button' class='btn btn-outline-primary'>+</button>";
+            conteudo += "<span id='span-" + contador +"'>1</span>";
+            conteudo += "<button onClick='RemoveProduto(" + contador +");' type='button' class='btn btn-outline-secondary'>-</button>";
+            tbody.append(conteudo);
+            contador++;
+        });
+    });
+
+    function AdicionaProduto(nome) {
+        var span = $("#span-" + nome);
+        span[0].innerHTML = parseInt(span[0].innerHTML) + 1;
+    }
+    function RemoveProduto(nome) {
+        var span = $("#span-" + nome);
+        if (parseInt(span[0].innerHTML) > 1)
+            span[0].innerHTML = parseInt(span[0].innerHTML) - 1;
+    }
+
+</script>

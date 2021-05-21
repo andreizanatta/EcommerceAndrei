@@ -1,0 +1,24 @@
+﻿
+<div>
+    <label >Nome</label>
+    <input type="text" value="" name="q" class="form-control form-control-sm" placeholder="Nome">
+
+    <label >E-mail</label>
+    <input onblur="validacaoEmail(this)" id="email" type="text" value="" name="q" class="form-control form-control-sm" placeholder="E-mail">
+    <span id="span">E-mail inválido</span>
+
+    <label >Telefone</label>
+    <input id="telefone" type="text" value="" name="q" class="form-control form-control-sm" placeholder="Telefone">
+</div>
+
+<script type="text/javascript" language="javascript">
+    $("#telefone").mask("(999) 9999-9999");
+    function validacaoEmail(e) {
+        if ($(e).val() != "") {
+            if (!validateEmail(e)) {
+                $(e).addClass("input-validation-error");
+                $(e).parent().find("#span").show();
+            }
+        }
+    }
+</script>
